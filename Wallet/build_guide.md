@@ -1,4 +1,4 @@
-# Electra wallet build guide
+# Electra wallet build guide (By Francesco)
 
 This document describes the complete process for building Electra-Qt wallet. The following platform are currently supported: Windows, Mac OSX, Linux. An additional section is specific for compiling the command line version of the wallet for Linux distributions where no GUI is available.
 
@@ -21,36 +21,36 @@ The Electra wallet source code we have is not developed to be compatible with ne
 ## Windows
 
 #### Required packages
-.MinGW MSYS
-.shell
-.Perl
-.Python
-.MinGW toolchain
-.QT Development environment
+*MinGW MSYS
+*shell
+*Perl
+*Python
+*MinGW toolchain
+*QT Development environment
 
 #### Create the build environment
 1. Setup a fresh Windows 7 x64 bit (Enterprise). Do not install ServicePack here. It is not needed to register your windows copy. This workstation must have internet access to facilitate download of software components.
 2. [optional] you can install Chrome browser of Mozilla Firefox to access the web
 3. Download and install 7Zip and Notepad++ useful for the build environment.
 4. Install MinGW (MSYS) shell as follow:
-. Download and install http://sourceforge.net/projects/mingw/files/Installer/mingw-getsetup.exe
-. Execute MinGW Installation Manager
-. From the Installation Manager make sure no package is pre-selected
-. Select only the followings: All packages MSYS, msys-base (only the bin)
-. Make sure the msys-gcc and msys-w32api packages are not selected for installation
-. Click Installation menu and then Apply Changes to start installation of selected components
+* Download and install http://sourceforge.net/projects/mingw/files/Installer/mingw-getsetup.exe
+* Execute MinGW Installation Manager
+* From the Installation Manager make sure no package is pre-selected
+* Select only the followings: All packages MSYS, msys-base (only the bin)
+* Make sure the msys-gcc and msys-w32api packages are not selected for installation
+* Click Installation menu and then Apply Changes to start installation of selected components
 5. Install Perl with all default settings from http://downloads.activestate.com/ActivePerl/releases/5.22.3.2204/ActivePerl-5.22.3.2204MSWin32-x86-64int-401627.exe
 6. Install Python with all default settings from http://www.python.org/ftp/python/3.3.3/python3.3.3.msi
 7. Install MinGW toolchain:
-. Download http://sourceforge.net/projects/mingww64/files/Toolchains%20targetting%20Win32/Personal%20Builds/mingwbuilds/4.8.2/threads-posix/dwarf/i686-4.8.2-release-posix-dwarf-rt_v3-rev3.7z
-. Unpack with 7Zip under `C:\` (do not change this path)
+* Download http://sourceforge.net/projects/mingww64/files/Toolchains%20targetting%20Win32/Personal%20Builds/mingwbuilds/4.8.2/threads-posix/dwarf/i686-4.8.2-release-posix-dwarf-rt_v3-rev3.7z
+* Unpack with 7Zip under `C:\` (do not change this path)
 From step 7 you should now have the following structure `C:\mingw32`. It’s time to check/set system environment variable.
 8. Verify the following folders have been set in your SYSTEM environment PATH variable:
-. `C:\MinGW\msys\1.0\bin`
-. `C:\mingw32\bin`
-. `C:\Python33`
-. `C:\Perl\site\bin`
-. `C:\Perl\bin`
+* `C:\MinGW\msys\1.0\bin`
+* `C:\mingw32\bin`
+* `C:\Python33`
+* `C:\Perl\site\bin`
+* `C:\Perl\bin`
 
 If one or more folder is missing, add it manually and your PATH system variable should look like:
 `C:\MinGW\msys\1.0\bin;C:\mingw32\bin;C:\Python33;C:\Perl\site\bin;C:\Perl\bin;%SystemRoot%\system32;%SystemRoot%;% SystemRoot%\System32\Wbem;%SYSTEMROOT%\System32\WindowsPowerShell\v1.0\`
@@ -58,9 +58,9 @@ If one or more folder is missing, add it manually and your PATH system variable 
 >Recommendation: if you are using a virtual machine, it’s time to shut down and take a snapshot now
 
 9. Install and compile the Qt Environment from source:
-. Download http://download.qt.io/official_releases/qt/4.8/4.8.6/qt-everywhereopensource-src-4.8.6.zip
-. Unpack the content under `C:\Qt\4.8.6`. You should have `C:\Qt\4.8.6\bin` (and other folders)
-. Open a command prompt window and compile the QT environment as follow (this may require a while):
+* Download http://download.qt.io/official_releases/qt/4.8/4.8.6/qt-everywhereopensource-src-4.8.6.zip
+* Unpack the content under `C:\Qt\4.8.6`. You should have `C:\Qt\4.8.6\bin` (and other folders)
+* Open a command prompt window and compile the QT environment as follow (this may require a while):
 ```
 C:\> cd C:\Qt\4.8.6
 C:\Qt\4.8.6\> configure -release -opensource -confirm-license -static -no-sqlsqlite -no-qt3support -no-opengl -qt-zlib -no-gif -qt-libpng -qt-libmng -no-libtiff -qt-libjpeg -no-dsp -no-vcproj -no-openssl -no-dbus -no-phonon -no-phonon-backend no-multimedia -no-audio-backend -no-webkit -no-script -no-scripttools -nodeclarative -no-declarative-debug -no-style-plastique -no-style-cleanlooks -nostyle-motif -no-style-cde -nomake demos -nomake examples
@@ -77,17 +77,17 @@ C:\Qt\4.8.6\> mingw32-make
 
 Now we will use the build environment from section above to compile wallet from source.
 First, we need all dependencies compiled from source. The following dependencies is used:
-.OpenSSL
-.Oracle Barkley DB
-.BOOST C++ libraries
-.UPNPC support library
-.LIBPNG
-.QREncode library
+* OpenSSL
+* Oracle Barkley DB
+* BOOST C++ libraries
+* UPNPC support library
+* LIBPNG
+* QREncode library
 
 Let’s start:
 1. Create `C:\deps` directory
 2. Download and save under `C:\deps` the package https://www.openssl.org/source/openssl1.0.1g.tar.gz . Open MinGW MSYS shell by running C:\MinGW\msys\1.0\msys.bat
-. From MSYS shell execute the following commands:
+* From MSYS shell execute the following commands:
 ```
 $ cd /c/deps
 $ tar zxvf openssl-1.0.1g.tar.gz
@@ -96,8 +96,8 @@ $ ./configure mingw
 $ make
 ```
 3. Download and save under `C:\deps` the package http://download.oracle.com/berkeley-db/db4.8.30.NC.tar.gz
-. Open MinGW MSYS shell by running `C:\MinGW\msys\1.0\msys.bat`
-. From MSYS shell execute the following commands:
+* Open MinGW MSYS shell by running `C:\MinGW\msys\1.0\msys.bat`
+* From MSYS shell execute the following commands:
 ```
 $ cd /c/deps
 $ tar zxvf db-4.8.30.NC.tar.gz
@@ -123,8 +123,8 @@ C:\deps\miniupnpc-1.9\> mkdir C:\deps\miniupnpc-1.9\miniupnpc
 C:\deps\miniupnpc-1.9\> copy C:\deps\miniupnpc-1.9\*.h C:\deps\miniupnpc1.9\miniupnpc
 ```
 10. Download and save under `C:\deps` the package http://prdownloads.sourceforge.net/libpng/libpng-1.6.9.tar.gz
-. Open MinGW MSYS shell by running `C:\MinGW\msys\1.0\msys.bat`
-. From MSYS shell execute the following commands:
+* Open MinGW MSYS shell by running `C:\MinGW\msys\1.0\msys.bat`
+* From MSYS shell execute the following commands:
 ```
 $ cd /c/deps
 $ tar zxvf libpng-1.6.9.tar.gz
@@ -132,8 +132,8 @@ $ cd libpng-1.6.9/ $ ./configure
 $ make
 ```
 11. Download and save under `C:\deps` the package http://fukuchi.org/works/qrencode/qrencode3.4.3.tar.gz
-. Open MinGW MSYS shell by running `C:\MinGW\msys\1.0\msys.bat`
-. From MSYS shell execute the following commands:
+* Open MinGW MSYS shell by running `C:\MinGW\msys\1.0\msys.bat`
+* From MSYS shell execute the following commands:
 ```
 $ cd /c/deps
 $ tar zxvf qrencode-3.4.3.tar.gz
@@ -156,8 +156,8 @@ BOOST_LIB_SUFFIX=-mgw48-mt-s-1_55 BOOST_INCLUDE_PATH=C:/deps/boost_1_55_0 BOOST_
 CONFIG += static
 ```
 5. Compile LEVELDB first:
-. Open MinGW MSYS shell by running `C:\MinGW\msys\1.0\msys.bat`
-. From MSYS shell execute the following commands:
+* Open MinGW MSYS shell by running `C:\MinGW\msys\1.0\msys.bat`
+* From MSYS shell execute the following commands:
 ```
 $ cd /c/Electra-master/src/leveldb
 $ TARGET_OS=NATIVE_WINDOWS make libleveldb.a libmemenv.a
@@ -180,9 +180,9 @@ TODO
 This section details the build process for Mac OSx platforms. It is recommended to work on a fresh copy of OSX without any other software installed.  
 This build process is based on OSX Sierra 10.12 running as virtual machine on Oracle Virtual box 5.1 and Windows 7 64 bit as host operating system.
 The build environment requires the following packages:
-.MacPorts
-.QT Development environment
-.XCode
+* MacPorts
+* QT Development environment
+* XCode
 
 Before setting up the build environment we will document steps to install OSX Sierra 10.12 as virtual machine. If you already have OSX ready, jump to **Prepare the build environment** section.
 
@@ -192,9 +192,9 @@ Install OSX Sierra on Virtual Box You must download MAC OSX sierra prebuilt disk
 Once you have the the ZIP file, extract the vmdk in a preferred location (e.g. `C:\disks`) and open Oracle Virtual Box:
 1. Create a new virtual machine
 2. In the Name and operating system pane:
-. type your preferred VM name (e.g. OSX)
-. Select Mac OS X as Type
-. Select Mac OS x 10.11 El Capitan (64 bit) as Version
+* type your preferred VM name (e.g. OSX)
+* Select Mac OS X as Type
+* Select Mac OS x 10.11 El Capitan (64 bit) as Version
 3. Set 4 GB of Memory size
 4. Select Use an existing virtual disk file and point to the VMDK file downloaded above
 5. Click Create
@@ -202,17 +202,17 @@ Now you need some customization on the new VM:
 6. Right click on the virtual machine and select Settings…
 7. In the Settings window select System on the left pane.
 On the Motherboard tab:
-.remove Floppy under Boot Order
-.Set Chipset as ICH9
-.Make sure all the extended properties are checked (I/O APIC, Enable EFI, Hardware clock)
+* remove Floppy under Boot Order
+* Set Chipset as ICH9
+* Make sure all the extended properties are checked (I/O APIC, Enable EFI, Hardware clock)
 On the Processor tab:
-. Set Processor(s) to 2
-. Check Feature Enable PAE/NX
+* Set Processor(s) to 2
+* Check Feature Enable PAE/NX
 8. In the Settings window select Display on the left pane
-.On the Screen tab set video memory at 128MB
+* On the Screen tab set video memory at 128MB
 9. In the Settings window select Network on the left pane. On the Adapter 1 tab:
-. Check Enable Network Adapter
-. Select Attached to NAT or Bridge according to you network layout
+* Check Enable Network Adapter
+* Select Attached to NAT or Bridge according to you network layout
 
 >NOTE: This VM must have access to internet to facilitate software download. Make sure your network settings permit this VM to access internet
 
@@ -249,11 +249,11 @@ Let’s create the build environment:
 $ sudo xcodebuild -license
 ```
 5. Install MacPorts to download wallet dependencies. To install MacPorts download and run https://github.com/macports/macports-base/releases/download/v2.4.2/MacPorts-2.4.2-10.12Sierra.pkg
-. In the Welcome to MacPorts installer welcome click Continue
-. In the Important Information window click Continue
-. In the Software License Agreement click Continue
-. Agree to License
-. In the Standard Install window click Install to begin installation
+* In the Welcome to MacPorts installer welcome click Continue
+* In the Important Information window click Continue
+* In the Software License Agreement click Continue
+* Agree to License
+* In the Standard Install window click Install to begin installation
 6. Open a terminal window and execute the following commands:
 ```
 $ sudo port install boost db48 openssl miniupnpc qrencode qt4-mac
@@ -281,7 +281,7 @@ TODO
 TODO
 
 ## References
-https://techsviewer.com/install-macos-sierra-virtualbox-windows/
-https://www.macports.org/install.php
-https://trac.macports.org/wiki/howto/InstallingOlderPort
-https://github.com/peercoin/peercoin/wiki/Mac-OSX-Wallet-Build-Instructions
+* https://techsviewer.com/install-macos-sierra-virtualbox-windows/
+* https://www.macports.org/install.php
+* https://trac.macports.org/wiki/howto/InstallingOlderPort
+* https://github.com/peercoin/peercoin/wiki/Mac-OSX-Wallet-Build-Instructions
