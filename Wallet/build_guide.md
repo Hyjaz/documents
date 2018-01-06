@@ -1,4 +1,4 @@
-# Electra wallet build guide
+# Electra wallet build guide (By Francesco)
 
 This document describes the complete process for building Electra-Qt wallet. The following platform are currently supported: Windows, Mac OSX, Linux. An additional section is specific for compiling the command line version of the wallet for Linux distributions where no GUI is available.
 
