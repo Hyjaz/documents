@@ -281,7 +281,7 @@ TODO
 TODO
 
 ## References
-https://techsviewer.com/install-macos-sierra-virtualbox-windows/
-https://www.macports.org/install.php
-https://trac.macports.org/wiki/howto/InstallingOlderPort
-https://github.com/peercoin/peercoin/wiki/Mac-OSX-Wallet-Build-Instructions
+* https://techsviewer.com/install-macos-sierra-virtualbox-windows/
+* https://www.macports.org/install.php
+* https://trac.macports.org/wiki/howto/InstallingOlderPort
+* https://github.com/peercoin/peercoin/wiki/Mac-OSX-Wallet-Build-Instructions
