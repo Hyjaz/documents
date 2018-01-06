@@ -1,2 +1,2 @@
-# documents
-A repository for documentation and other MD documents related to the Electra project.
+# ECA Documents
+A repository contains documentations and technical specifications of the Electra project.
