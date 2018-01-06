@@ -1,2 +1,2 @@
-# electra-documents
-A repository for documentation and other md documents related to the Electra project.
+# documents
+A repository for documentation and other MD documents related to the Electra project.
