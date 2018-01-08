@@ -21,12 +21,13 @@ The Electra wallet source code we have is not developed to be compatible with ne
 ## Windows
 
 #### Required packages
-*MinGW MSYS
-*shell
-*Perl
-*Python
-*MinGW toolchain
-*QT Development environment
+
+* MinGW MSYS
+* shell
+* Perl
+* Python
+* MinGW toolchain
+* QT Development environment
 
 #### Create the build environment
 1. Setup a fresh Windows 7 x64 bit (Enterprise). Do not install ServicePack here. It is not needed to register your windows copy. This workstation must have internet access to facilitate download of software components.
@@ -280,8 +281,46 @@ TODO
 #### Package for distribution
 TODO
 
+## Ubuntu 16.04.3 (by Starl1ng)
+
+Add the bitcoin repository to install libdb4.8
+
+```
+sudo add-apt-repository ppa:bitcoin/bitcoin
+```
+```
+sudo apt-get update
+
+sudo apt-get upgrade
+
+sudo apt-get install git build-essential libssl-dev libdb4.8-dev libdb4.8++-dev libboost-all-dev libminiupnpc-dev qt5-default qt5-qmake qtbase5-dev-tools qttools5-dev-tools
+```
+```
+mkdir ~/src
+cd ~/src
+git clone https://github.com/electra01/Electra
+cd ~/src/Electra
+```
+Build a GUI wallet
+
+```
+qmake
+make
+```
+
+After the make command finished, you will have the Electra-qt executable file, which is th Electra coin wallet. You can copy/move this file to any location.
+
+```
+./Electra-qt
+```
+
+At the first run you will most likely see an error message. Just start the wallet again.
+
+And don't forget to create the Electra.conf file in ~/.Electra directory and add some nodes. Somehow, it is not created automatically.
+
 ## References
 * https://techsviewer.com/install-macos-sierra-virtualbox-windows/
 * https://www.macports.org/install.php
 * https://trac.macports.org/wiki/howto/InstallingOlderPort
 * https://github.com/peercoin/peercoin/wiki/Mac-OSX-Wallet-Build-Instructions
+* https://bitcointalk.org/index.php?topic=1848351.msg18391336#msg18391336
